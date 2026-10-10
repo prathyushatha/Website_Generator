@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Create A Modern Business Website</title>
+
+  <meta name="description"
+    content="A modern, responsive business website with product listings and a working contact form.">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --dark: #111827;
+      --text: #172033;
+      --muted: #64748b;
+      --background: #f5f7fb;
+      --border: #e5e7eb;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    header {
+      background: var(--dark);
+      color: var(--white);
+      padding: 18px 7%;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    nav .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    nav .nav-links a:hover {
+      color: #c7d2fe;
+    }
+
+    .hero {
+      padding: 85px 7%;
+      background: linear-gradient(120deg, #e0e7ff, #ffffff);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 0.85rem;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+      margin: 12px auto;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 18px auto 26px;
+      color: #475569;
+      font-size: 1.05rem;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+    }
+
+    .button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #a5b4fc;
+      outline-offset: 3px;
+    }
+
+    .button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    section {
+      padding: 55px 7%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin: 0 auto 30px;
+      max-width: 700px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .about-card {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      max-width: 1150px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-icon {
+      display: grid;
+      place-items: center;
+      min-height: 145px;
+      background: #eef2ff;
+      border-radius: 10px;
+      font-size: 3.5rem;
+      margin-bottom: 18px;
+    }
+
+    .product-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .product-card p {
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .product-tag {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #eef2ff;
+      color: var(--primary-dark);
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .contact-card {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: var(--white);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    .submit-row {
+      margin: 20px 0 0;
+    }
+
+    #status {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    #status.visible {
+      display: block;
+    }
+
+    #status.success {
+      color: #166534;
+      background: #dcfce7;
+    }
+
+    #status.error {
+      color: #991b1b;
+      background: #fee2e2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 7%;
+      background: var(--dark);
+      color: #cbd5e1;
+    }
+
+    footer a {
+      color: #c7d2fe;
+    }
+
+    @media (max-width: 800px) {
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+
+      header,
+      section,
+      .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav .nav-links {
+        gap: 16px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#home">
+        Create A Modern Business Website
+      </a>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="eyebrow">Welcome to our website</div>
+
+      <h1>A Better Digital Experience for Your Business</h1>
+
+      <p>
+        Discover our services, explore our offerings, and connect
+        with our team through a simple, modern website designed
+        to work across desktop computers, tablets, and mobile devices.
+      </p>
+
+      <a class="button" href="#products">Explore Products</a>
+      <a class="button" href="#contact" style="margin-left: 8px;">Contact Us</a>
+    </section>
+
+    <section id="about">
+      <div class="card about-card">
+        <h2>About Our Business</h2>
+
+        <p>
+          We aim to provide useful solutions and a smooth
+          online experience for our customers.
+        </p>
+
+        <p>
+          This website was generated by the AI Website Generator.
+          It includes a responsive interface, product cards,
+          a contact form, a FastAPI backend, REST endpoints,
+          and an SQLite database.
+        </p>
+
+        <p>
+          <strong>Reference website:</strong>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer">Example Domain</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="section-heading">
+        <h2>Our Products and Services</h2>
+        <p>
+          Explore these sample offerings. Replace them with
+          your actual products or services when customizing
+          the generated project.
+        </p>
+      </div>
+
+      <div class="products">
+        <article class="card product-card">
+          <div class="product-icon" aria-hidden="true">💻</div>
+          <span class="product-tag">Technology</span>
+          <h3>Digital Solutions</h3>
+          <p>
+            Modern digital solutions designed to help
+            businesses improve their online presence.
+          </p>
+          <a href="#contact">Enquire now</a>
+        </article>
+
+        <article class="card product-card">
+          <div class="product-icon" aria-hidden="true">⚙️</div>
+          <span class="product-tag">Services</span>
+          <h3>Business Services</h3>
+          <p>
+            Practical services to support business
+            operations and customer experiences.
+          </p>
+          <a href="#contact">Enquire now</a>
+        </article>
+
+        <article class="card product-card">
+          <div class="product-icon" aria-hidden="true">🚀</div>
+          <span class="product-tag">Innovation</span>
+          <h3>Growth Packages</h3>
+          <p>
+            Flexible starting points for organizations
+            looking to grow and explore new opportunities.
+          </p>
+          <a href="#contact">Enquire now</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-heading">
+        <h2>Contact Us</h2>
+        <p>
+          Have a question? Fill in the form and send us a message.
+        </p>
+      </div>
+
+      <div class="card contact-card">
+        <form id="contact-form">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" maxlength="100" autocomplete="name" required>
+
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" maxlength="254" autocomplete="email" required>
+
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" maxlength="5000" required></textarea>
+
+          <p class="submit-row">
+            <button class="button" type="submit" id="sendButton">
+              Send Message
+            </button>
+          </p>
+
+          <p id="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2026 Create A Modern Business Website.
+      Generated locally with AI Website Generator.
+    </p>
+    <p>
+      <a href="#home">Back to top</a>
+    </p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contact-form");
+      const status = document.getElementById("status");
+      const sendButton = document.getElementById("sendButton");
+
+      function showStatus(message, type) {
+        status.textContent = message;
+        status.className = "visible " + type;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) {
+          return;
+        }
+
+        sendButton.disabled = true;
+        sendButton.textContent = "Sending...";
+
+        status.className = "";
+        status.textContent = "";
+
+        try {
+          const formData = new FormData(form);
+
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            body: formData
+          });
+
+
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            const detail = Array.isArray(data.detail)
+              ? data.detail.map(item => item.msg).join(", ")
+              : data.detail;
+
+            throw new Error(
+              detail || "Unable to send your message."
+            );
+          }
+
+          showStatus(
+            data.message || "Your message was sent successfully!",
+            "success"
+          );
+
+          form.reset();
+
+        } catch (error) {
+          showStatus(
+            "Could not send your message: " + error.message,
+            "error"
+          );
+
+          console.error("Contact form error:", error);
+
+        } finally {
+          sendButton.disabled = false;
+          sendButton.textContent = "Send Message";
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

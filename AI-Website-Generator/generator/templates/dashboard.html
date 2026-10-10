@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Website Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <div class="brand">✦ AI Website Generator</div>
+            <div class="subtitle">Prompt-driven website creation platform</div>
+        </div>
+        <span class="status"><span class="dot"></span> Local system</span>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <span class="eyebrow">WEBSITE AUTOMATION PLATFORM</span>
+            <h1>Turn your ideas into<br><span>working websites.</span></h1>
+            <p>Provide a reference website and describe your requirements.
+                Generate a reusable project with a backend, APIs, database
+                and automated tests.</p>
+        </section>
+
+        <div class="workspace">
+            <section class="panel">
+                <div class="panel-heading">
+                    <div class="step">01</div>
+                    <div>
+                        <h2>Configure your website</h2>
+                        <p>Describe the application you want to create.</p>
+                    </div>
+                </div>
+
+                <form id="generator-form">
+                    <label for="reference_url">Reference website URL</label>
+                    <input id="reference_url" name="reference_url" type="url" placeholder="https://example.com"
+                        required>
+
+                    <label for="requirement">Website requirements</label>
+                    <textarea id="requirement" name="requirement" minlength="10" maxlength="3000" rows="5"
+                        placeholder="Create a modern business website with a homepage, product listings, contact form and responsive design."
+                        required></textarea>
+
+                    <div class="hint">Be specific about pages and features.</div>
+
+                    <button id="generate-button" type="submit">
+                        ✦ Generate Website
+                    </button>
+
+                    <p id="status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <section class="panel output-panel">
+                <div class="panel-heading">
+                    <div class="step">02</div>
+                    <div>
+                        <h2>Generation results</h2>
+                        <p>Your generated project details will appear here.</p>
+                    </div>
+                </div>
+
+                <div id="results" class="results empty">
+                    <div class="empty-icon">⌘</div>
+                    <h3>Ready to generate</h3>
+                    <p>Your project files, preview and run instructions
+                        will appear here.</p>
+                </div>
+
+                <div class="features">
+                    <div><span>✓</span> Frontend templates</div>
+                    <div><span>✓</span> Backend and APIs</div>
+                    <div><span>✓</span> SQLite integration</div>
+                    <div><span>✓</span> Automated tests</div>
+                </div>
+            </section>
+        </div>
+
+        <section class="panel history">
+            <div class="panel-heading">
+                <div class="step">03</div>
+                <div>
+                    <h2>Generation history</h2>
+                    <p>Previously submitted website requests.</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Project</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobs-body">
+                        {% for job in jobs %}
+                        <tr>
+                            <td>{{ job.id }}</td>
+                            <td>{{ job.project_name }}</td>
+                            <td>{{ job.status }}</td>
+                            <td>{{ job.created_at }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4">No projects generated yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>AI Website Generator · Local development environment</footer>
+    </main>
+
+    <script>
+        const form = document.getElementById("generator-form");
+        const button = document.getElementById("generate-button");
+        const statusBox = document.getElementById("status");
+        const results = document.getElementById("results");
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            button.disabled = true;
+            button.textContent = "Generating...";
+            statusBox.textContent = "Analyzing the reference website...";
+            results.className = "results";
+            results.textContent = "Creating your project. Please wait.";
+
+            try {
+                const payload = {
+                    reference_url: document.getElementById("reference_url").value.trim(),
+                    requirement: document.getElementById("requirement").value.trim()
+                };
+
+                const response = await fetch("/api/generate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || "Generation failed.");
+                }
+
+                results.replaceChildren();
+
+                const heading = document.createElement("h3");
+                heading.textContent = "✓ Website generated successfully";
+
+                const description = document.createElement("p");
+                description.textContent = "Project: " + data.project_name;
+
+                const path = document.createElement("code");
+                path.textContent = data.output_path;
+
+                const preview = document.createElement("a");
+                preview.href = data.preview_url;
+                preview.target = "_blank";
+                preview.rel = "noopener noreferrer";
+                preview.className = "result-link";
+                preview.textContent = "Open generated preview";
+
+                const instructions = document.createElement("p");
+                instructions.textContent =
+                    "Run command: " + data.run_command;
+
+                const command = document.createElement("code");
+                command.textContent = data.run_command;
+
+                const copyButton = document.createElement("button");
+                copyButton.type = "button";
+                copyButton.className = "secondary-button";
+                copyButton.textContent = "Copy run command";
+                copyButton.addEventListener("click", async () => {
+                    try {
+                        await navigator.clipboard.writeText(data.run_command);
+                        copyButton.textContent = "Copied";
+                    } catch {
+                        copyButton.textContent = "Copy unavailable";
+                    }
+                });
+
+                const features = document.createElement("ul");
+                data.features.forEach((feature) => {
+                    const item = document.createElement("li");
+                    item.textContent = feature;
+                    features.appendChild(item);
+                });
+
+                results.append(
+                    heading, description, path, preview,
+                    instructions, command, copyButton, features
+                );
+
+                statusBox.textContent = "Generation completed.";
+                await refreshJobs();
+
+            } catch (error) {
+                results.textContent = error.message;
+                statusBox.textContent = "Generation failed. Check the error above.";
+            } finally {
+                button.disabled = false;
+                button.textContent = "✦ Generate Website";
+            }
+        });
+
+        async function refreshJobs() {
+            const response = await fetch("/api/jobs");
+            if (!response.ok) return;
+
+            const data = await response.json();
+            const body = document.getElementById("jobs-body");
+            body.replaceChildren();
+
+            if (!data.jobs.length) {
+                const row = document.createElement("tr");
+                const cell = document.createElement("td");
+                cell.colSpan = 4;
+                cell.textContent = "No projects generated yet.";
+                row.appendChild(cell);
+                body.appendChild(row);
+                return;
+            }
+
+            data.jobs.forEach((job) => {
+                const row = document.createElement("tr");
+                [job.id, job.project_name, job.status, job.created_at].forEach(value => {
+                    const cell = document.createElement("td");
+                    cell.textContent = value ?? "";
+                    row.appendChild(cell);
+                });
+                body.appendChild(row);
+            });
+        }
+    </script>
+</body>
+
+</html>

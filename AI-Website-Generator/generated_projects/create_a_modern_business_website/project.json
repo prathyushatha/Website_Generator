@@ -1,0 +1,18 @@
+{
+  "name": "create_a_modern_business_website",
+  "reference_url": "https://example.com",
+  "requirement": "Create a modern business website with a responsive homepage,\nproduct listing section, contact form, REST APIs, FastAPI backend,\nSQLite database and automated tests.",
+  "reference_info": {
+    "url": "https://example.com",
+    "title": "Example Domain",
+    "headings": [],
+    "links": []
+  },
+  "features": [
+    "homepage",
+    "contact_form",
+    "sqlite",
+    "rest_api",
+    "tests"
+  ]
+}

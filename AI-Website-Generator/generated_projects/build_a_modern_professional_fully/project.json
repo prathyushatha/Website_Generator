@@ -1,0 +1,18 @@
+{
+  "name": "build_a_modern_professional_fully",
+  "reference_url": "https://example.com",
+  "requirement": "Build a modern, professional, fully responsive e-commerce business website inspired by the reference URL https://example.com.\n\nRequirements:\n\n1. Frontend: Create an attractive homepage with a navigation bar, hero section, About Us section, product listings, services, testimonials, and contact section.\n2. Design: Use modern CSS, responsive layouts, smooth scrolling, attractive buttons, product cards, and mobile-friendly styling.\n3. Backend: Use Python and FastAPI to implement the server and REST APIs.\n4. Database: Use SQLite to store contact form submissions, customer details, and product information.\n5. Contact Form: Include name, email, and message fields with input validation, successful submission messages, and error handling.\n6. APIs: Implement endpoints for health checks, listing products, submitting contact forms, and retrieving saved contact messages.\n7. Testing: Include automated pytest tests for the homepage, API endpoints, and contact form validation.\n8. Project Structure: Generate all required frontend, backend, database, configuration, and test files in a separate project folder.\n9. Documentation: Include a README.md with installation instructions, commands to run the application, API documentation, and testing instructions.\n10. Execution: The generated website must run locally on Windows using localhost without requiring paid hosting.\n\nGenerate working code rather than a static mockup. Ensure that the frontend communicates correctly with the backend and that submitted contact messages are saved in SQLite.",
+  "reference_info": {
+    "url": "https://example.com",
+    "title": "Example Domain",
+    "headings": [],
+    "links": []
+  },
+  "features": [
+    "homepage",
+    "contact_form",
+    "sqlite",
+    "rest_api",
+    "tests"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "build_a_modern_e_commerce",
+  "website_type": "ecommerce",
+  "reference_url": "https://www.shopify.com/",
+  "requirement": "Build a modern e-commerce website with a responsive homepage, product cards, product categories, search bar, shopping cart UI, customer contact form, and a clean mobile-friendly design. Use Python FastAPI for the backend and SQLite for storing contact details.",
+  "reference_info": {
+    "url": "https://www.shopify.com/",
+    "title": "Shopify: The All-in-One Commerce Platform for Businesses - Shopify",
+    "headings": [
+      "Be the next AI all-star",
+      "store they line up for",
+      "Your brand has entered the\u00a0chat",
+      "Show up everywhere. Without going anywhere.",
+      "Grow around the\u00a0world",
+      "For anyone from entrepreneurs to enterprise",
+      "Meet your secret weapon,\u00a0Sidekick",
+      "Your very own commerce AI",
+      "What winning looks like",
+      "Customize everything with\u00a0apps",
+      "Hyperdriven by AI. Commerce to the\u00a0core.",
+      "There\u2019s no better place for you to\u00a0build"
+    ],
+    "links": [
+      "Skip to Content",
+      "Get started fast You could be selling by tomorrow.",
+      "Switch to Shopify Get more customers. Make more sales.",
+      "Trusted by enterprise brands No matter your size, complexity, or ambition.",
+      "World's best checkout Proven to convert better.",
+      "Sidekick Your commerce-obsessed AI assistant.",
+      "Website Builder",
+      "Themes",
+      "Domains",
+      "Customer Accounts",
+      "Sidekick",
+      "Online",
+      "AI Chats",
+      "Point of Sale",
+      "Shop App",
+      "Social & Marketplaces",
+      "Global",
+      "B2B",
+      "Across Markets"
+    ]
+  },
+  "features": [
+    "responsive_homepage",
+    "category_specific_sections",
+    "contact_form",
+    "sqlite",
+    "rest_api",
+    "automated_tests"
+  ]
+}
